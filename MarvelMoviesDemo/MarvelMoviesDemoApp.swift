@@ -12,6 +12,7 @@ struct MarvelMoviesDemoApp: App {
     var body: some Scene {
         WindowGroup {
             ContentView()
+                .environmentObject(OAuthClient.shared)
         }
     }
 }

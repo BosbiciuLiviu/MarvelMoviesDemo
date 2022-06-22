@@ -11,6 +11,19 @@
 		1B807894286317D800766AB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B807893286317D800766AB3 /* ContentView.swift */; };
 		1B807896286317D900766AB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B807895286317D900766AB3 /* Assets.xcassets */; };
 		1B807899286317D900766AB3 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B807898286317D900766AB3 /* Preview Assets.xcassets */; };
+		1B8078A328631AB700766AB3 /* AuthenticationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078A228631AB700766AB3 /* AuthenticationInfo.swift */; };
+		1B8078A528631B6600766AB3 /* Endpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078A428631B6600766AB3 /* Endpoint.swift */; };
+		1B8078A728631FB500766AB3 /* NetworkResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078A628631FB500766AB3 /* NetworkResponse.swift */; };
+		1B8078A92863215600766AB3 /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078A82863215600766AB3 /* Movie.swift */; };
+		1B8078AB2863242500766AB3 /* API.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078AA2863242500766AB3 /* API.swift */; };
+		1B8078AE2863246100766AB3 /* Config.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078AD2863246100766AB3 /* Config.swift */; };
+		1B8078B02863253500766AB3 /* AuthClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078AF2863253500766AB3 /* AuthClient.swift */; };
+		1B8078B2286325D600766AB3 /* NetworkMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078B1286325D600766AB3 /* NetworkMonitor.swift */; };
+		1B8078B4286326B100766AB3 /* KeychainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078B3286326B100766AB3 /* KeychainManager.swift */; };
+		1B8078B7286326D800766AB3 /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = 1B8078B6286326D800766AB3 /* KeychainAccess */; };
+		1B8078BA28635B0500766AB3 /* URL+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078B928635B0500766AB3 /* URL+Extensions.swift */; };
+		1B8078BD28635C4200766AB3 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078BC28635C4200766AB3 /* LoginView.swift */; };
+		1B8078C028635DA900766AB3 /* ButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B8078BF28635DA900766AB3 /* ButtonStyle.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -19,6 +32,18 @@
 		1B807893286317D800766AB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		1B807895286317D900766AB3 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		1B807898286317D900766AB3 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		1B8078A228631AB700766AB3 /* AuthenticationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthenticationInfo.swift; sourceTree = "<group>"; };
+		1B8078A428631B6600766AB3 /* Endpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Endpoint.swift; sourceTree = "<group>"; };
+		1B8078A628631FB500766AB3 /* NetworkResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkResponse.swift; sourceTree = "<group>"; };
+		1B8078A82863215600766AB3 /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
+		1B8078AA2863242500766AB3 /* API.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = API.swift; sourceTree = "<group>"; };
+		1B8078AD2863246100766AB3 /* Config.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Config.swift; sourceTree = "<group>"; };
+		1B8078AF2863253500766AB3 /* AuthClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthClient.swift; sourceTree = "<group>"; };
+		1B8078B1286325D600766AB3 /* NetworkMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkMonitor.swift; sourceTree = "<group>"; };
+		1B8078B3286326B100766AB3 /* KeychainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainManager.swift; sourceTree = "<group>"; };
+		1B8078B928635B0500766AB3 /* URL+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = "URL+Extensions.swift"; path = "../../../../URL+Extensions.swift"; sourceTree = "<group>"; };
+		1B8078BC28635C4200766AB3 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		1B8078BF28635DA900766AB3 /* ButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonStyle.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +51,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1B8078B7286326D800766AB3 /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -51,8 +77,14 @@
 		1B807890286317D800766AB3 /* MarvelMoviesDemo */ = {
 			isa = PBXGroup;
 			children = (
+				1B8078BE28635DA100766AB3 /* Styles */,
+				1B8078BB28635BF800766AB3 /* View */,
+				1B8078B828635AF100766AB3 /* Extensions */,
+				1B8078AC2863245A00766AB3 /* Config */,
+				1B8078A12863194700766AB3 /* Authentication */,
+				1B8078A02863194100766AB3 /* Network */,
+				1B80789F2863193800766AB3 /* Model */,
 				1B807891286317D800766AB3 /* MarvelMoviesDemoApp.swift */,
-				1B807893286317D800766AB3 /* ContentView.swift */,
 				1B807895286317D900766AB3 /* Assets.xcassets */,
 				1B807897286317D900766AB3 /* Preview Content */,
 			);
@@ -65,6 +97,68 @@
 				1B807898286317D900766AB3 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		1B80789F2863193800766AB3 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				1B8078A82863215600766AB3 /* Movie.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		1B8078A02863194100766AB3 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				1B8078A428631B6600766AB3 /* Endpoint.swift */,
+				1B8078A628631FB500766AB3 /* NetworkResponse.swift */,
+				1B8078AA2863242500766AB3 /* API.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		1B8078A12863194700766AB3 /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				1B8078A228631AB700766AB3 /* AuthenticationInfo.swift */,
+				1B8078AF2863253500766AB3 /* AuthClient.swift */,
+				1B8078B1286325D600766AB3 /* NetworkMonitor.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		1B8078AC2863245A00766AB3 /* Config */ = {
+			isa = PBXGroup;
+			children = (
+				1B8078AD2863246100766AB3 /* Config.swift */,
+				1B8078B3286326B100766AB3 /* KeychainManager.swift */,
+			);
+			path = Config;
+			sourceTree = "<group>";
+		};
+		1B8078B828635AF100766AB3 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				1B8078B928635B0500766AB3 /* URL+Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		1B8078BB28635BF800766AB3 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				1B807893286317D800766AB3 /* ContentView.swift */,
+				1B8078BC28635C4200766AB3 /* LoginView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		1B8078BE28635DA100766AB3 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				1B8078BF28635DA900766AB3 /* ButtonStyle.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -83,6 +177,9 @@
 			dependencies = (
 			);
 			name = MarvelMoviesDemo;
+			packageProductDependencies = (
+				1B8078B6286326D800766AB3 /* KeychainAccess */,
+			);
 			productName = MarvelMoviesDemo;
 			productReference = 1B80788E286317D800766AB3 /* MarvelMoviesDemo.app */;
 			productType = "com.apple.product-type.application";
@@ -111,6 +208,9 @@
 				Base,
 			);
 			mainGroup = 1B807885286317D800766AB3;
+			packageReferences = (
+				1B8078B5286326D800766AB3 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+			);
 			productRefGroup = 1B80788F286317D800766AB3 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -138,7 +238,19 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B807894286317D800766AB3 /* ContentView.swift in Sources */,
+				1B8078BA28635B0500766AB3 /* URL+Extensions.swift in Sources */,
+				1B8078B02863253500766AB3 /* AuthClient.swift in Sources */,
+				1B8078A728631FB500766AB3 /* NetworkResponse.swift in Sources */,
+				1B8078A92863215600766AB3 /* Movie.swift in Sources */,
 				1B807892286317D800766AB3 /* MarvelMoviesDemoApp.swift in Sources */,
+				1B8078A528631B6600766AB3 /* Endpoint.swift in Sources */,
+				1B8078B4286326B100766AB3 /* KeychainManager.swift in Sources */,
+				1B8078AE2863246100766AB3 /* Config.swift in Sources */,
+				1B8078B2286325D600766AB3 /* NetworkMonitor.swift in Sources */,
+				1B8078BD28635C4200766AB3 /* LoginView.swift in Sources */,
+				1B8078A328631AB700766AB3 /* AuthenticationInfo.swift in Sources */,
+				1B8078AB2863242500766AB3 /* API.swift in Sources */,
+				1B8078C028635DA900766AB3 /* ButtonStyle.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,6 +453,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		1B8078B5286326D800766AB3 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		1B8078B6286326D800766AB3 /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B8078B5286326D800766AB3 /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 1B807886286317D800766AB3 /* Project object */;
 }

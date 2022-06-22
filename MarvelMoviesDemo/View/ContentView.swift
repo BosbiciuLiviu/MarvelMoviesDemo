@@ -8,9 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @ObservedObject var authInfo: AuthenticationInfo = AuthenticationInfo.shared
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        if !authInfo.loggedIn {
+            LoginView()
+        } else {
+            Text("wow")
+        }
     }
 }
 
