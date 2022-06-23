@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import AlertToast
 
 struct LoginView: View {
     @ObservedObject var userData: AuthenticationInfo = AuthenticationInfo.shared
@@ -18,59 +19,69 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-        VStack(spacing: 0) {
-            TextField(
-                "Username",
-                text: $username
-            ) { _ in
-            } onCommit: {
-                //
-            }
-            .keyboardType(.emailAddress)
-            .autocapitalization(.none)
-            .disableAutocorrection(true)
-            .frame(height: 42)
+            Text("Login")
+                .font(.title)
+                .padding(.vertical, 40)
             
-            Color(.systemGray4)
-                .frame(height: 0.5)
-            
-            SecureField(
-                "Password",
-                text: $password
-            )
+            VStack(spacing: 0) {
+                TextField(
+                    "Username",
+                    text: $username
+                ) { _ in
+                } onCommit: {
+                    //
+                }
+                .keyboardType(.emailAddress)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .frame(height: 42)
-        }
-        .padding(.leading, 16)
-        .background(Color(.systemGray6))
-        .cornerRadius(10)
-        
-        
-        if (!self.loading) {
-            Button(action: {
-                self.loading = true
-                oauthClient.handleLogin(username: username, password: password)
-            }, label: {
-                Text("Log in with email")
+                
+                Color(.systemGray4)
+                    .frame(height: 0.5)
+                
+                SecureField(
+                    "Password",
+                    text: $password
+                )
+                    .autocapitalization(.none)
+                    .disableAutocorrection(true)
+                    .frame(height: 42)
+            }
+            .padding(.leading, 16)
+            .background(Color(.systemGray6))
+            .cornerRadius(10)
+            
+            
+            if (!self.loading) {
+                Button(action: {
+                    self.loading = true
+                    oauthClient.handleLogin(username: username, password: password)
+                }, label: {
+                    Text("Log in with email")
+                        .frame(maxWidth: .infinity, minHeight: 40)
+                })
+                    .outlinedButtonStyle()
+                    .padding(.top, 15)
+            } else {
+                ProgressView()
                     .frame(maxWidth: .infinity, minHeight: 40)
-            })
-                .outlinedButtonStyle()
-                .padding(.top, 15)
-        } else {
-            ProgressView()
-                .frame(maxWidth: .infinity, minHeight: 40)
-                .outlinedButtonStyle()
-                .padding(.top, 15)
-        }
+                    .outlinedButtonStyle()
+                    .padding(.top, 15)
+            }
+            
+            Spacer()
         }
         .padding(.horizontal)
+        .toast(isPresenting: $showToast, duration: 2, tapToDismiss: true,
+               alert: {
+            AlertToast(displayMode: .banner(.pop),
+                       type: .error(Color(.systemRed)),
+                       title: "Invalid Credentials")
+        }, onTap: {
+        }, completion: {
+        })
         .onChange(of: oauthClient.authState) { authState in
-            // scenario: User registers, but does not complete the profile.
-            // he then DELETES the app (not only quit, but delete it)
-            // then he installs it again and logs in.
             if case .authenticated(_) = authState {
-                // todo: do something on auth finished.
             } else if case .signedOut = authState {
                 loading = false
                 self.toastMessage = "Invalid credentials"

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1B4B2A382864610F002F2962 /* Responses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4B2A372864610F002F2962 /* Responses.swift */; };
+		1B4B2A3B28646EDA002F2962 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = 1B4B2A3A28646EDA002F2962 /* AlertToast */; };
 		1B4F2ADB2863E1A0009ACE66 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2ADA2863E1A0009ACE66 /* MoviesViewModel.swift */; };
 		1B4F2ADF2863E3B2009ACE66 /* Movie+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2ADE2863E3B2009ACE66 /* Movie+Networking.swift */; };
 		1B4F2AE12863E610009ACE66 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2AE02863E610009ACE66 /* Date+Extensions.swift */; };
@@ -64,6 +65,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				1B8078B7286326D800766AB3 /* KeychainAccess in Frameworks */,
+				1B4B2A3B28646EDA002F2962 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,6 +215,7 @@
 			name = MarvelMoviesDemo;
 			packageProductDependencies = (
 				1B8078B6286326D800766AB3 /* KeychainAccess */,
+				1B4B2A3A28646EDA002F2962 /* AlertToast */,
 			);
 			productName = MarvelMoviesDemo;
 			productReference = 1B80788E286317D800766AB3 /* MarvelMoviesDemo.app */;
@@ -244,6 +247,7 @@
 			mainGroup = 1B807885286317D800766AB3;
 			packageReferences = (
 				1B8078B5286326D800766AB3 /* XCRemoteSwiftPackageReference "KeychainAccess" */,
+				1B4B2A3928646EDA002F2962 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = 1B80788F286317D800766AB3 /* Products */;
 			projectDirPath = "";
@@ -495,6 +499,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		1B4B2A3928646EDA002F2962 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		1B8078B5286326D800766AB3 /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
@@ -506,6 +518,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		1B4B2A3A28646EDA002F2962 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 1B4B2A3928646EDA002F2962 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
 		1B8078B6286326D800766AB3 /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 1B8078B5286326D800766AB3 /* XCRemoteSwiftPackageReference "KeychainAccess" */;

@@ -2,6 +2,15 @@
   "object": {
     "pins": [
       {
+        "package": "AlertToast",
+        "repositoryURL": "https://github.com/elai950/AlertToast",
+        "state": {
+          "branch": "master",
+          "revision": "6f0c1da59221ff337ebab856e13c7fcd26f9a426",
+          "version": null
+        }
+      },
+      {
         "package": "KeychainAccess",
         "repositoryURL": "https://github.com/kishikawakatsumi/KeychainAccess",
         "state": {

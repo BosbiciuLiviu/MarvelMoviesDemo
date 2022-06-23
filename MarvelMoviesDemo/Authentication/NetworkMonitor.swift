@@ -28,8 +28,10 @@ final class NetworkMonitor: ObservableObject {
                     let password = keychain.getString(keychain.keychainPassword)
                     
                     // refresh only if there is a network connection. If we don't do this, the user will be logged out.
-                    OAuthClient.shared.handleLogin(username: username ?? "",
-                                                   password: password ?? "")
+                    if let username = username, let password = password {
+                        OAuthClient.shared.handleLogin(username: username,
+                                                       password: password)
+                    }
                 }
             }
         }

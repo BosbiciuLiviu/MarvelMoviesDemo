@@ -33,7 +33,7 @@ public class API {
                 switch state {
                 case .authenticated(let token):
                     self.authenticatedSession = URLSession(configuration: Self.makeSessionConfiguration(token: token))
-                case .refreshing, .signinInProgress, .signedOut:
+                case .signinInProgress, .signedOut:
                     self.authenticatedSession = nil
                 }
             }
@@ -137,8 +137,7 @@ public class API {
         
         if authenticatedSession != nil
             || OAuthClient.shared.authState == .signedOut
-            || OAuthClient.shared.authState == .signinInProgress
-            || OAuthClient.shared.authState == .refreshing {
+            || OAuthClient.shared.authState == .signinInProgress {
             
             let url = Self.makeURL(host: host,
                                    endpoint: endpoint,

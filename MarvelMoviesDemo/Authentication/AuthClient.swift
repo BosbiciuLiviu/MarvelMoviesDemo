@@ -12,13 +12,13 @@ import Combine
 public class OAuthClient: ObservableObject {
     public enum State: Equatable {
         case signedOut
-        case refreshing, signinInProgress
+        case signinInProgress
         case authenticated(authToken: String)
     }
     
     static public let shared = OAuthClient()
     
-    @Published public var authState = State.refreshing {
+    @Published public var authState = State.signedOut {
         didSet {
             switch authState {
             case .authenticated:
@@ -35,7 +35,7 @@ public class OAuthClient: ObservableObject {
     }
     
     var loading: Bool {
-        authState == .signinInProgress || authState == .refreshing
+        authState == .signinInProgress
     }
     
     private var refreshTimer: Timer?
@@ -49,17 +49,17 @@ public class OAuthClient: ObservableObject {
     
     init() {
         monitor = NetworkMonitor()
-        if let username = keychain.getString(keychain.keychainUsername),
-           let password = keychain.getString(keychain.keychainPassword) {
-            if monitor.connectionStatus == .connected {
-                DispatchQueue.main.async {
-                    // refresh only if there is a network connection. If we don't do this, the user will be logged out.
-                    self.handleLogin(username: username, password: password)
-                }
-            }
-        } else {
-            authState = .signedOut
-        }
+//        if let username = keychain.getString(keychain.keychainUsername),
+//           let password = keychain.getString(keychain.keychainPassword) {
+//            if monitor.connectionStatus == .connected {
+//                DispatchQueue.main.async {
+//                    // refresh only if there is a network connection. If we don't do this, the user will be logged out.
+//                    self.handleLogin(username: username, password: password)
+//                }
+//            }
+//        } else {
+//            authState = .signedOut
+//        }
         
         // Check every minute if the token is about to expire
         refreshTimer = Timer.scheduledTimer(withTimeInterval: 1 * 60, repeats: true) { _ in
