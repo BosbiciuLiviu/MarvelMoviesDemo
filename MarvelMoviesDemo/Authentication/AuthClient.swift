@@ -49,17 +49,6 @@ public class OAuthClient: ObservableObject {
     
     init() {
         monitor = NetworkMonitor()
-//        if let username = keychain.getString(keychain.keychainUsername),
-//           let password = keychain.getString(keychain.keychainPassword) {
-//            if monitor.connectionStatus == .connected {
-//                DispatchQueue.main.async {
-//                    // refresh only if there is a network connection. If we don't do this, the user will be logged out.
-//                    self.handleLogin(username: username, password: password)
-//                }
-//            }
-//        } else {
-//            authState = .signedOut
-//        }
         
         // Check every minute if the token is about to expire
         refreshTimer = Timer.scheduledTimer(withTimeInterval: 1 * 60, repeats: true) { _ in

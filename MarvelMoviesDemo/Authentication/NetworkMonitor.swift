@@ -7,7 +7,6 @@
 import Foundation
 import Network
 
-/// An enum representing the regions in which DO Spaces are available
 enum ConnectionStatus: String, CaseIterable {
     case undefined,
          connected,

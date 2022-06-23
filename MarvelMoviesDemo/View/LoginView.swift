@@ -10,8 +10,8 @@ import AlertToast
 
 struct LoginView: View {
     @ObservedObject var userData: AuthenticationInfo = AuthenticationInfo.shared
-    @State private var username: String = "iosdeveloper"
-    @State private var password: String = "novartis2022"
+    @State private var username: String = ""
+    @State private var password: String = ""
     @State var loading: Bool = false
     @State var showToast = false
     @State var toastMessage: String = ""

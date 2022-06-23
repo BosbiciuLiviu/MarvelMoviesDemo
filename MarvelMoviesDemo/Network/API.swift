@@ -78,14 +78,11 @@ public class API {
     
     static private func makeURL(host: String = HOST,
                                 endpoint: Endpoint,
-                                forceSignedOutURL: Bool,
                                 isJSONAPI: Bool) -> URL {
         var url: URL
         
         if (host != HOST) {
             url = URL(string: "\(host)")!
-        } else if forceSignedOutURL {
-            url = URL(string: "\(Self.URL_PREFIX)www.\(host)")!
         } else {
             switch OAuthClient.shared.authState {
             case .authenticated:
@@ -94,7 +91,6 @@ public class API {
                 url = URL(string: "\(Self.URL_PREFIX)\(host)")!
             }
         }
-        // https://testsite.com?blablabla becomes https://testsite.com/?blablabla if I don't add this.
         if (host == HOST) {
             url = url.appendingPathComponent(endpoint.path())
         }
@@ -129,45 +125,24 @@ public class API {
     
     func request<T: Decodable, P: Any>(host: String = HOST,
                                        endpoint: Endpoint,
-                                       forceSignedOutURL: Bool = false,
                                        httpMethod: String = "GET",
                                        isJSONEndpoint: Bool = true,
                                        queryParamsAsBody: Bool = false,
                                        params: [String: P]? = nil) -> AnyPublisher<T, NetworkError> {
+            
+        let url = Self.makeURL(host: host,
+                               endpoint: endpoint,
+                               isJSONAPI: isJSONEndpoint)
+        let request = Self.makeRequest(url: url,
+                                       httpMethod: httpMethod,
+                                       queryParamsAsBody: queryParamsAsBody,
+                                       params: params)
         
-        if authenticatedSession != nil
-            || OAuthClient.shared.authState == .signedOut
-            || OAuthClient.shared.authState == .signinInProgress {
-            
-            let url = Self.makeURL(host: host,
-                                   endpoint: endpoint,
-                                   forceSignedOutURL: forceSignedOutURL,
-                                   isJSONAPI: isJSONEndpoint)
-            let request = Self.makeRequest(url: url,
-                                           httpMethod: httpMethod,
-                                           queryParamsAsBody: queryParamsAsBody,
-                                           params: params)
-            
-            if let session = authenticatedSession,
-                OAuthClient.shared.authState != .signinInProgress {
-                return executeRequest(publisher: session.dataTaskPublisher(for: request))
-            } else {
-                return executeRequest(publisher: signedOutSession.dataTaskPublisher(for: request))
-            }
+        if let session = authenticatedSession,
+            OAuthClient.shared.authState != .signinInProgress {
+            return executeRequest(publisher: session.dataTaskPublisher(for: request))
         } else {
-            return $authenticatedSession
-                .compactMap{ $0 }
-                .map {
-                    $0.dataTaskPublisher(for: Self.makeRequest(url: Self.makeURL(host: host,
-                                                                                 endpoint: endpoint,
-                                                                                 forceSignedOutURL: forceSignedOutURL,
-                                                                                 isJSONAPI: isJSONEndpoint),
-                                                               httpMethod: httpMethod,
-                                                               queryParamsAsBody: queryParamsAsBody,
-                                                               params: params))
-                }
-                .flatMap { self.executeRequest(publisher: $0) }
-                .eraseToAnyPublisher()
+            return executeRequest(publisher: signedOutSession.dataTaskPublisher(for: request))
         }
     }
     
@@ -191,6 +166,7 @@ public class API {
                         .eraseToAnyPublisher()
                 }
             }
+            .retry(2)
             .tryMap({ result in
                 return try result.get().self
             })

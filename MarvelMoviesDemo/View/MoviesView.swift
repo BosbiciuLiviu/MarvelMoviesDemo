@@ -14,17 +14,6 @@ enum SortType {
     case releaseDateDescending
 }
 
-// todo: move this
-struct NavigationLazyView<Content: View>: View {
-    let build: () -> Content
-    init(_ build: @autoclosure @escaping () -> Content) {
-        self.build = build
-    }
-    var body: Content {
-        build()
-    }
-}
-
 struct MoviesView: View {
     @State var showSortingActionSheet: Bool = false
     @StateObject var moviesViewModel: MoviesViewModel = MoviesViewModel()
