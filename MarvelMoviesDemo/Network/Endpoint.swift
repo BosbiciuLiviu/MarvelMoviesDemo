@@ -22,7 +22,7 @@ public enum Endpoint: Equatable {
         case let .movieDetails(movieId):
             return "/api/movies/\(movieId)"
         case let .titleImage(title):
-            return "/images/\(title)"
+            return "/images/\(title).jpg"
         }
     }
 }

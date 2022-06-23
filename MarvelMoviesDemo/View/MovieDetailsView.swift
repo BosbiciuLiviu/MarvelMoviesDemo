@@ -33,6 +33,18 @@ struct MovieDetailsView: View {
         ScrollView {
             HStack {
                 VStack(alignment: .leading, spacing: 20) {
+                    AsyncImage(url: API.shared.getMovieURL(movieViewModel.movie.title)) { phase in
+                        if let image = phase.image {
+                            image.resizable()
+                        } else if phase.error != nil {
+                            EmptyView()
+                        } else {
+                            ProgressView()
+                        }
+                    }
+                        .aspectRatio(contentMode: .fit)
+                        .cornerRadius(10)
+                    
                     MovieDetailView(name: "Title", value: movieViewModel.movie.title)
                     MovieDetailView(name: "Release date", value: movieViewModel.movie.releaseDate.toDateString())
                     MovieDetailView(name: "Director", value: movieViewModel.movie.director ?? "Unknown")

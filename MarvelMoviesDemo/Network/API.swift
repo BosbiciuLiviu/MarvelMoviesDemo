@@ -70,6 +70,12 @@ public class API {
         return configuration
     }
     
+    // probably not the best place, but I'll leave it here for simplicity
+    public func getMovieURL(_ title: String) -> URL? {
+        let url = "\(Self.URL_PREFIX)\(API.HOST)\(Endpoint.titleImage(title: title).path())"
+        return URL(string: url.addingPercentEncoding(withAllowedCharacters: CharacterSet.urlQueryAllowed) ?? url)
+    }
+    
     static private func makeURL(host: String = HOST,
                                 endpoint: Endpoint,
                                 forceSignedOutURL: Bool,
