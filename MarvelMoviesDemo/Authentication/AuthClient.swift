@@ -42,9 +42,6 @@ public class OAuthClient: ObservableObject {
     @ObservedObject var monitor: NetworkMonitor
     
     let keychain = KeychainManager.shared
-    private let keychainUsername = "username"
-    private let keychainPassword = "password"
-    private let keychainToken = "token"
     
     // Request
     private var requestCancellable: AnyCancellable?
@@ -52,8 +49,8 @@ public class OAuthClient: ObservableObject {
     
     init() {
         monitor = NetworkMonitor()
-        if let username = keychain.getString(keychainUsername),
-           let password = keychain.getString(keychainPassword) {
+        if let username = keychain.getString(keychain.keychainUsername),
+           let password = keychain.getString(keychain.keychainPassword) {
             if monitor.connectionStatus == .connected {
                 DispatchQueue.main.async {
                     // refresh only if there is a network connection. If we don't do this, the user will be logged out.
@@ -67,8 +64,8 @@ public class OAuthClient: ObservableObject {
             refreshTimer = Timer.scheduledTimer(withTimeInterval: 4 * 60, repeats: true) { _ in
                 switch self.authState {
                 case .authenticated(_):
-                    if let username = self.keychain.getString(self.keychainUsername),
-                       let password = self.keychain.getString(self.keychainPassword) {
+                    if let username = self.keychain.getString(self.keychain.keychainUsername),
+                       let password = self.keychain.getString(self.keychain.keychainPassword) {
                         // refresh only if there is a network connection. If we don't do this, the user will be logged out.
                         if self.monitor.connectionStatus == .connected {
                             self.handleLogin(username: username, password: password)
@@ -98,10 +95,11 @@ public class OAuthClient: ObservableObject {
                     AuthenticationInfo.shared.loggedIn = true
                 }
             }, receiveValue: { response in
-                self.keychain.saveString(key: self.keychainUsername, value: username)
-                self.keychain.saveString(key: self.keychainPassword, value: password)
-                self.keychain.saveString(key: self.keychainToken, value: response.token)
+                self.keychain.saveString(key: self.keychain.keychainUsername, value: username)
+                self.keychain.saveString(key: self.keychain.keychainPassword, value: password)
+                self.keychain.saveString(key: self.keychain.keychainToken, value: response.token)
                 // todo: take validTo into account
+                API.shared.setToken(token: response.token)
             })
     }
     
@@ -119,8 +117,8 @@ public class OAuthClient: ObservableObject {
     
     public func logout() {
         authState = .signedOut
-        self.keychain.saveString(key: keychainUsername, value: nil)
-        self.keychain.saveString(key: keychainPassword, value: nil)
-        self.keychain.saveString(key: keychainToken, value: nil)
+        self.keychain.saveString(key: keychain.keychainUsername, value: nil)
+        self.keychain.saveString(key: keychain.keychainPassword, value: nil)
+        self.keychain.saveString(key: keychain.keychainToken, value: nil)
     }
 }

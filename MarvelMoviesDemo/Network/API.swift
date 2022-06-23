@@ -17,7 +17,7 @@ public class API {
     @Published private var authenticatedSession: URLSession?
     private var signedOutSession: URLSession
     private var decoder: JSONDecoder
-    
+    private var keychain: KeychainManager = KeychainManager.shared
     private var oauthStateCancellable: AnyCancellable?
     
     init () {
@@ -25,7 +25,9 @@ public class API {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
         decoder.dateDecodingStrategy = .formatted(dateFormatter)
-        signedOutSession = URLSession(configuration: Self.makeSessionConfiguration(token: nil))
+        signedOutSession = URLSession(configuration: Self.makeSessionConfiguration(token: nil,
+                                                                                   username: keychain.getString(keychain.keychainUsername),
+                                                                                   password: keychain.getString(keychain.keychainPassword)))
         oauthStateCancellable = OAuthClient.shared.$authState.sink { state in
             DispatchQueue.main.async {
                 switch state {
@@ -39,10 +41,14 @@ public class API {
     }
     
     public func setAuthCredentials(username: String,
-                                          password: String) {
+                                   password: String) {
         signedOutSession = URLSession(configuration: Self.makeSessionConfiguration(token: nil,
                                                                                    username: username,
                                                                                    password: password))
+    }
+    
+    public func setToken(token: String) {
+        self.authenticatedSession = URLSession(configuration: Self.makeSessionConfiguration(token: token))
     }
     
     static private func makeSessionConfiguration(token: String?,
@@ -110,10 +116,7 @@ public class API {
         } else {
             request = URLRequest(url: url)
         }
-        //        if !queryParamsAsBody {
-        //            request.setValue("image/jpeg", forHTTPHeaderField: "Content-Type")
-        //            request.setValue("public-read", forHTTPHeaderField: "x-amz-acl")
-        //        }
+        
         request.httpMethod = httpMethod
         return request
     }
@@ -182,7 +185,6 @@ public class API {
                         .eraseToAnyPublisher()
                 }
             }
-            .retry(2)
             .tryMap({ result in
                 return try result.get().self
             })

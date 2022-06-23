@@ -14,7 +14,7 @@ struct ContentView: View {
         if !authInfo.loggedIn {
             LoginView()
         } else {
-            Text("wow")
+            MoviesView()
         }
     }
 }

@@ -10,6 +10,10 @@ import KeychainAccess
 
 class KeychainManager {
     static public let shared = KeychainManager()
+    public let keychainUsername = "username"
+    public let keychainPassword = "password"
+    public let keychainToken = "token"
+    
     let keychain: Keychain
     
     private let keychainService = "com.novartis.MarvelMoviesDemo"
