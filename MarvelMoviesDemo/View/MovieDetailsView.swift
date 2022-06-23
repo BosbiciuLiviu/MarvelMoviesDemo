@@ -7,6 +7,19 @@
 
 import SwiftUI
 
+struct MovieDetailView: View {
+    var name: String
+    var value: String
+    
+    var body: some View {
+        VStack(alignment: .leading) {
+            Text(name)
+                .font(.headline)
+            Text(value)
+        }
+    }
+}
+
 struct MovieDetailsView: View {
     @State var movie: Movie
     @StateObject var movieViewModel: MovieViewModel
@@ -19,13 +32,13 @@ struct MovieDetailsView: View {
     var body: some View {
         ScrollView {
             HStack {
-                VStack(alignment: .leading) {
-                    Text("Title: \(movieViewModel.movie.title)")
-                    Text("Release date: " + movieViewModel.movie.releaseDate.toDateString())
-                    Text("Director: \(movieViewModel.movie.director ?? "Unknown")")
-                    Text("Watch order: \(String(movieViewModel.movie.watchOrder))")
-                    Text("Created at: \(movieViewModel.movie.createdAt?.toString() ?? "Unknown")")
-                    Text("Updated at: \(movieViewModel.movie.updatedAt?.toString() ?? "Unknown")")
+                VStack(alignment: .leading, spacing: 20) {
+                    MovieDetailView(name: "Title", value: movieViewModel.movie.title)
+                    MovieDetailView(name: "Release date", value: movieViewModel.movie.releaseDate.toDateString())
+                    MovieDetailView(name: "Director", value: movieViewModel.movie.director ?? "Unknown")
+                    MovieDetailView(name: "Watch order", value: String(movieViewModel.movie.watchOrder))
+                    MovieDetailView(name: "Created at", value: movieViewModel.movie.createdAt?.toString() ?? "Unknown")
+                    MovieDetailView(name: "Updated at", value: movieViewModel.movie.updatedAt?.toString() ?? "Unknown")
                 }
                 Spacer()
             }
