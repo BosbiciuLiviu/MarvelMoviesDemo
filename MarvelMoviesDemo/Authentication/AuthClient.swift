@@ -54,26 +54,34 @@ public class OAuthClient: ObservableObject {
             if monitor.connectionStatus == .connected {
                 DispatchQueue.main.async {
                     // refresh only if there is a network connection. If we don't do this, the user will be logged out.
-                    self.generateAuthToken(username: username, password: password)
+                    self.handleLogin(username: username, password: password)
                 }
-            } else {
-                authState = .signedOut
             }
-            
-            // refresh every 4 minutes (the token expires in 5 minutes)
-            refreshTimer = Timer.scheduledTimer(withTimeInterval: 4 * 60, repeats: true) { _ in
-                switch self.authState {
-                case .authenticated(_):
-                    if let username = self.keychain.getString(self.keychain.keychainUsername),
-                       let password = self.keychain.getString(self.keychain.keychainPassword) {
-                        // refresh only if there is a network connection. If we don't do this, the user will be logged out.
-                        if self.monitor.connectionStatus == .connected {
-                            self.handleLogin(username: username, password: password)
-                        }
-                    }
-                default:
+        } else {
+            authState = .signedOut
+        }
+        
+        // Check every minute if the token is about to expire
+        refreshTimer = Timer.scheduledTimer(withTimeInterval: 1 * 60, repeats: true) { _ in
+            switch self.authState {
+            case .authenticated(_):
+                let currentDate = Date()
+                let validToStr = self.keychain.getString(self.keychain.validTo)
+                let validToDate = validToStr != nil ? ISO8601DateFormatter().date(from: validToStr!) : Date()
+                let secondsUntilInvalid = validToDate?.timeIntervalSince(currentDate) ?? 0
+                if (secondsUntilInvalid > 119) {
                     break
                 }
+                // If the token is about to expire in less than two minutes, refresh it.
+                if let username = self.keychain.getString(self.keychain.keychainUsername),
+                   let password = self.keychain.getString(self.keychain.keychainPassword) {
+                    // refresh only if there is a network connection. If we don't do this, the user will be logged out.
+                    if self.monitor.connectionStatus == .connected {
+                        self.handleLogin(username: username, password: password)
+                    }
+                }
+            default:
+                break
             }
         }
     }
@@ -98,7 +106,9 @@ public class OAuthClient: ObservableObject {
                 self.keychain.saveString(key: self.keychain.keychainUsername, value: username)
                 self.keychain.saveString(key: self.keychain.keychainPassword, value: password)
                 self.keychain.saveString(key: self.keychain.keychainToken, value: response.token)
-                // todo: take validTo into account
+                self.keychain.saveString(key: self.keychain.validTo, value: response.validTo.ISO8601Format())
+                
+                self.authState = .authenticated(authToken: response.token)
                 API.shared.setToken(token: response.token)
             })
     }

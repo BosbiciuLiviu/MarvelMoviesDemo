@@ -28,26 +28,38 @@ struct NavigationLazyView<Content: View>: View {
 struct MoviesView: View {
     @State var showSortingActionSheet: Bool = false
     @StateObject var moviesViewModel: MoviesViewModel = MoviesViewModel()
+    @ObservedObject var authClient = OAuthClient.shared
     
     var body: some View {
         NavigationView {
-            ScrollView {
-                ForEach($moviesViewModel.movies) { $movie in
-                    NavigationLink(destination: NavigationLazyView(MovieDetailsView(movie: movie))) {
-                        HStack {
-                            VStack(alignment: .leading) {
-                                Text(movie.title)
-                                    .multilineTextAlignment(.leading)
-                                    .font(.headline)
-                                Text(movie.releaseDate.toDateString())
-                                    .multilineTextAlignment(.leading)
-                                    .font(.subheadline)
+            Group {
+                if case .authenticated(_) = authClient.authState {
+                    ScrollView {
+                        ForEach($moviesViewModel.movies) { $movie in
+                            NavigationLink(destination: NavigationLazyView(MovieDetailsView(movie: movie))) {
+                                HStack {
+                                    VStack(alignment: .leading) {
+                                        Text(movie.title)
+                                            .multilineTextAlignment(.leading)
+                                            .font(.headline)
+                                        Text(movie.releaseDate.toDateString())
+                                            .multilineTextAlignment(.leading)
+                                            .font(.subheadline)
+                                    }
+                                    Spacer()
+                                }
+                                .foregroundColor(Color(.label))
+                                .padding()
                             }
-                            Spacer()
                         }
-                        .foregroundColor(Color(.label))
-                        .padding()
                     }
+                    .onAppear {
+                        moviesViewModel.getMovies()
+                    }
+                } else {
+                    Spacer()
+                    ProgressView()
+                    Spacer()
                 }
             }
             .actionSheet(isPresented: $showSortingActionSheet) {
@@ -71,18 +83,23 @@ struct MoviesView: View {
                 )
             }
             .navigationBarTitle("Movies")
-            .navigationBarItems(trailing: Button(action: {
-                showSortingActionSheet = true
-            }) {
-                Image(systemName: "arrow.up.arrow.down")
+            .navigationBarItems(trailing: HStack(spacing: 20) {
+                Button(action: {
+                    OAuthClient.shared.logout()
+                }) {
+                    Text("Logout")
+                }
+                
+                Button(action: {
+                    showSortingActionSheet = true
+                }) {
+                    Image(systemName: "arrow.up.arrow.down")
+                }
+                .buttonStyle(.plain)
             }
-                                    .buttonStyle(.plain)
             )
-            
         }
-        .onAppear {
-            moviesViewModel.getMovies()
-        }
+        .navigationViewStyle(.stack)
     }
 }
 

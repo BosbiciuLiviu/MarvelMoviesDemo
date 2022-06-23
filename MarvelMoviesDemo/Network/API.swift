@@ -143,7 +143,8 @@ public class API {
                                            queryParamsAsBody: queryParamsAsBody,
                                            params: params)
             
-            if let session = authenticatedSession, !forceSignedOutURL {
+            if let session = authenticatedSession,
+                OAuthClient.shared.authState != .signinInProgress {
                 return executeRequest(publisher: session.dataTaskPublisher(for: request))
             } else {
                 return executeRequest(publisher: signedOutSession.dataTaskPublisher(for: request))

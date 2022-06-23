@@ -23,9 +23,13 @@ final class NetworkMonitor: ObservableObject {
             isNotConnected = !(connectionStatus == .connected)
             if connectionStatus == .connected {
                 DispatchQueue.main.async {
+                    let keychain = KeychainManager.shared
+                    let username = keychain.getString(keychain.keychainUsername)
+                    let password = keychain.getString(keychain.keychainPassword)
+                    
                     // refresh only if there is a network connection. If we don't do this, the user will be logged out.
-//                    OAuthClient.shared.refreshToken(username: <#T##String#>, password: <#T##String#>)()
-                    // todo liviu: change this.
+                    OAuthClient.shared.handleLogin(username: username ?? "",
+                                                   password: password ?? "")
                 }
             }
         }

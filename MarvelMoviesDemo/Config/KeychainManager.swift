@@ -13,6 +13,7 @@ class KeychainManager {
     public let keychainUsername = "username"
     public let keychainPassword = "password"
     public let keychainToken = "token"
+    public let validTo = "validTo"
     
     let keychain: Keychain
     
