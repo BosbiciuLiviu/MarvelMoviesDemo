@@ -13,7 +13,7 @@ struct Movie: Identifiable, Codable {
     let title: String
     let watchOrder: Int
     let releaseDate: Date
+    let director: String?
     let createdAt: Date?
     let updatedAt: Date?
-    let director: String?
 }

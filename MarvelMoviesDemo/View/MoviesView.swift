@@ -14,6 +14,17 @@ enum SortType {
     case releaseDateDescending
 }
 
+// todo: move this
+struct NavigationLazyView<Content: View>: View {
+    let build: () -> Content
+    init(_ build: @autoclosure @escaping () -> Content) {
+        self.build = build
+    }
+    var body: Content {
+        build()
+    }
+}
+
 struct MoviesView: View {
     @State var showSortingActionSheet: Bool = false
     @StateObject var moviesViewModel: MoviesViewModel = MoviesViewModel()
@@ -22,16 +33,21 @@ struct MoviesView: View {
         NavigationView {
             ScrollView {
                 ForEach($moviesViewModel.movies) { $movie in
-                    HStack {
-                        VStack(alignment: .leading) {
-                            Text(movie.title)
-                                .font(.headline)
-                            Text(movie.releaseDate.toDateString())
-                                .font(.subheadline)
+                    NavigationLink(destination: NavigationLazyView(MovieDetailsView(movie: movie))) {
+                        HStack {
+                            VStack(alignment: .leading) {
+                                Text(movie.title)
+                                    .multilineTextAlignment(.leading)
+                                    .font(.headline)
+                                Text(movie.releaseDate.toDateString())
+                                    .multilineTextAlignment(.leading)
+                                    .font(.subheadline)
+                            }
+                            Spacer()
                         }
-                        Spacer()
+                        .foregroundColor(Color(.label))
+                        .padding()
                     }
-                    .padding()
                 }
             }
             .actionSheet(isPresented: $showSortingActionSheet) {

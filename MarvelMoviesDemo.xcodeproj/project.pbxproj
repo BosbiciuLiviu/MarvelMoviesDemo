@@ -10,6 +10,8 @@
 		1B4F2ADB2863E1A0009ACE66 /* MoviesViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2ADA2863E1A0009ACE66 /* MoviesViewModel.swift */; };
 		1B4F2ADF2863E3B2009ACE66 /* Movie+Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2ADE2863E3B2009ACE66 /* Movie+Networking.swift */; };
 		1B4F2AE12863E610009ACE66 /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2AE02863E610009ACE66 /* Date+Extensions.swift */; };
+		1B4F2AE32863F05C009ACE66 /* MovieDetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2AE22863F05C009ACE66 /* MovieDetailsView.swift */; };
+		1B4F2AE52863F351009ACE66 /* MovieViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B4F2AE42863F351009ACE66 /* MovieViewModel.swift */; };
 		1B807892286317D800766AB3 /* MarvelMoviesDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B807891286317D800766AB3 /* MarvelMoviesDemoApp.swift */; };
 		1B807894286317D800766AB3 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1B807893286317D800766AB3 /* ContentView.swift */; };
 		1B807896286317D900766AB3 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 1B807895286317D900766AB3 /* Assets.xcassets */; };
@@ -34,6 +36,8 @@
 		1B4F2ADA2863E1A0009ACE66 /* MoviesViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoviesViewModel.swift; sourceTree = "<group>"; };
 		1B4F2ADE2863E3B2009ACE66 /* Movie+Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Movie+Networking.swift"; sourceTree = "<group>"; };
 		1B4F2AE02863E610009ACE66 /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		1B4F2AE22863F05C009ACE66 /* MovieDetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailsView.swift; sourceTree = "<group>"; };
+		1B4F2AE42863F351009ACE66 /* MovieViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewModel.swift; sourceTree = "<group>"; };
 		1B80788E286317D800766AB3 /* MarvelMoviesDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MarvelMoviesDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		1B807891286317D800766AB3 /* MarvelMoviesDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarvelMoviesDemoApp.swift; sourceTree = "<group>"; };
 		1B807893286317D800766AB3 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				1B4F2ADA2863E1A0009ACE66 /* MoviesViewModel.swift */,
+				1B4F2AE42863F351009ACE66 /* MovieViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -177,6 +182,7 @@
 				1B807893286317D800766AB3 /* ContentView.swift */,
 				1B8078BC28635C4200766AB3 /* LoginView.swift */,
 				1B8078C12863DAA200766AB3 /* MoviesView.swift */,
+				1B4F2AE22863F05C009ACE66 /* MovieDetailsView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -269,12 +275,14 @@
 				1B8078BA28635B0500766AB3 /* URL+Extensions.swift in Sources */,
 				1B8078B02863253500766AB3 /* AuthClient.swift in Sources */,
 				1B8078A728631FB500766AB3 /* NetworkResponse.swift in Sources */,
+				1B4F2AE32863F05C009ACE66 /* MovieDetailsView.swift in Sources */,
 				1B8078A92863215600766AB3 /* Movie.swift in Sources */,
 				1B807892286317D800766AB3 /* MarvelMoviesDemoApp.swift in Sources */,
 				1B8078A528631B6600766AB3 /* Endpoint.swift in Sources */,
 				1B8078B4286326B100766AB3 /* KeychainManager.swift in Sources */,
 				1B8078AE2863246100766AB3 /* Config.swift in Sources */,
 				1B8078B2286325D600766AB3 /* NetworkMonitor.swift in Sources */,
+				1B4F2AE52863F351009ACE66 /* MovieViewModel.swift in Sources */,
 				1B8078C22863DAA200766AB3 /* MoviesView.swift in Sources */,
 				1B8078BD28635C4200766AB3 /* LoginView.swift in Sources */,
 				1B4F2ADF2863E3B2009ACE66 /* Movie+Networking.swift in Sources */,

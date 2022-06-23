@@ -13,4 +13,9 @@ extension Movie {
         return API.shared.request(endpoint: .movies,
                                   params: [:])
     }
+    
+    mutating public func getDetails() -> AnyPublisher<Movie, NetworkError> {
+        return API.shared.request(endpoint: .movieDetails(movieId: self.id),
+                                  params: [:])
+    }
 }
